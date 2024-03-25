@@ -1,0 +1,130 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<style>
+    :root {
+        --primary-color: #3498db; /* Blue */
+        --secondary-color: #2ecc71; /* Green */
+        --background-color: #f9f9f9; /* Light Grey */
+        --text-color: #333; /* Dark Grey */
+    }
+
+    body {
+        background-color: var(--background-color);
+        color: var(--text-color);
+        font-family: 'Arial', sans-serif;
+        padding: 20px;
+    }
+
+    .announcement {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .announcement:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+    }
+
+    .announcement-header {
+        background-color: var(--primary-color);
+        color: #fff;
+        padding: 15px 20px;
+        font-size: 1.25rem;
+    }
+
+    .announcement-body {
+        padding: 20px;
+        line-height: 1.5;
+    }
+
+    .announcement-footer {
+        background-color: var(--secondary-color);
+        color: #fff;
+        padding: 10px 20px;
+        text-align: right;
+        font-size: 0.9rem;
+    }
+
+    a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+    .highlight-end-time {
+    color: #d9534f; /* Change the text color */
+    font-weight: bold; /* Make the text bold */
+    background-color: #f9f9f9; /* Light background color */
+    padding: 5px; /* Add some padding */
+    border-left: 4px solid #d9534f; /* Add a left border for emphasis */
+    display: inline-block; /* Adjust display to fit content */
+    margin-top: 10px; /* Add some margin on top */
+}
+
+</style>
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                          
+                        <div class="container mt-4">
+                            <div class="timeline">
+                                {% for announcement in announcements %}
+                                <div class="announcement">
+                                    <div class="announcement-header">
+                                        {{ announcement.title }}
+                                    </div>
+                                    <div class="announcement-body">
+                                        <h2>{{ announcement.Context|linebreaks }}</h2>
+                                        <!-- <p><strong>Batch:</strong> {{ announcement.batch.name }}</p> -->
+                                        <h4><strong>Organisation:</strong> {{ announcement.organisation }}</h4>
+                                        <h4 class="highlight-end-time"><strong>End Time:</strong> {{ announcement.announcement_endtime|date:"D, d M Y " }}</h4>
+                                        {% if announcement.file %}
+                                        <!-- <h4><strong>Document:</strong> <img src="{{ announcement.file.url }}" alt="File" width="300" height="300"></h4> -->
+                                        <p><strong>File:</strong> <a href="{{ announcement.file.url }}" target="_blank">Download</a></p>
+                                        {% endif %}
+                                        {% if announcement.link %}
+                                        <h4><strong>Link:</strong> <a href="{{ announcement.link }}" target="_blank">Visit</a></h4>
+                                        {% endif %}
+                                        
+                                    </div>
+                                    <div class="announcement-footer">
+                                        Posted: {{ announcement.Time|date:"M d, Y" }}
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <h1>No announcements found.</h1>
+                                {% endfor %}
+                            </div>
+                            
+                        </div>          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock content %}

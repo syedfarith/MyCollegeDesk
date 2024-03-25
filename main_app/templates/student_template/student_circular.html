@@ -1,0 +1,62 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+<style>
+    .post-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.post-container h2 {
+    margin-top: 0;
+}
+
+.post-container p {
+    color: #333;
+}
+
+.post-container span {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+</style>
+
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    {% for announcements in announcements %}
+                    <div class="post-container">
+                        <h2>{{ announcements.staffid }}</h2>
+                        <h2>{{ announcements.title }}</h2>
+                        <p>{{ announcements.context }}</p>
+                        <h2>{{anouncement.batch}}</h2><br>
+                        <h2>{{anouncement.Category}}</h2><br>
+                        <h2>{{anouncement.Time}}</h2><br>
+                    </div>
+                    {% endfor %}
+                    <!-- /.card-body -->
+
+                <!-- /.card -->
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+

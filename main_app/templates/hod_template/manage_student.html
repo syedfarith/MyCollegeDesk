@@ -1,0 +1,110 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="container mt-4">
+                            <div class="row">
+                                {% for student in students %}
+                                <div class="col-md-4 mb-4">
+                                    <div class="student-card">
+                                        <div class="student-card-header">
+                                            <img src="{{ student.profile_pic }}" alt="Profile Picture" onerror="this.onerror=null; this.src='default-image-path.jpg'" class="student-image">
+                                            <h5 class="student-name">{{ student.first_name }} {{ student.last_name }}</h5>
+                                        </div>
+                                        <div class="student-card-body">
+                                            <p><strong>Email:</strong> {{ student.email }}</p>
+                                            <p><strong>Gender:</strong> {{ student.gender }}</p>
+                                            <p><strong>Course:</strong> {{ student.student.course.name }}</p>
+                                        </div>
+                                        <div class="student-card-footer">
+                                            <a href="{% url 'edit_student' student.student.id %}" class="btn-edit">Edit</a>
+                                            <a href="{% url 'delete_student' student.student.id %}" class="btn-delete" onclick="return confirm('Are you sure?')">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+<style>
+    .student-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+}
+
+.student-card-header {
+    background-color: #007bff; /* Primary color */
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+}
+
+.student-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    margin-bottom: 10px;
+}
+
+.student-name {
+    margin: 0;
+    color: #ffffff;
+}
+
+.student-card-body {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background */
+}
+
+.student-card-footer {
+    background-color: #e9ecef; /* Footer background */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-edit, .btn-delete {
+    padding: 5px 10px;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-edit {
+    background-color: #28a745; /* Success color */
+}
+
+.btn-delete {
+    background-color: #dc3545; /* Danger color */
+}
+
+.btn-edit:hover, .btn-delete:hover {
+    opacity: 0.8;
+}
+
+</style>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

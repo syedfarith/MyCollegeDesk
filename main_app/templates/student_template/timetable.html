@@ -1,0 +1,23 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h3 class="card-title">Time Table</h3>
+                    </div>
+                    {% for first in first %}
+                   <img src="..\media\3ss.jpg" >
+                   {%  endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

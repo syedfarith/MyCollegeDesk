@@ -1,0 +1,63 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-dark">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+
+                    
+                    <div class="container mt-4">
+                        <h2>Create Announcement</h2>
+                        <form action="{% url 'Send_circular' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="title">Title:</label>
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter announcement title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Context">Context:</label>
+                                <textarea class="form-control" id="Context" name="Context" rows="3" placeholder="Enter announcement context" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="batch">Batch:</label>
+                                <select class="form-control" id="batch" name="batch" required>
+                                    {% for batch in batches %}
+                                    <option value="{{ batch.id }}">{{ batch.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="organisation">Organisation:</label>
+                                <input type="text" class="form-control" id="organisation" name="organisation" placeholder="Enter organisation (optional)">
+                            </div>
+                            <div class="form-group">
+                                <label for="announcement_endtime">Announcement End Time:</label>
+                                <input type="datetime-local" class="form-control" id="announcement_endtime" name="announcement_endtime">
+                            </div>
+                            <div class="form-group">
+                                <label for="file">File (optional):</label>
+                                <input type="file" class="form-control-file" id="file" name="file">
+                            </div>
+                            <div class="form-group">
+                                <label for="link">Link (optional):</label>
+                                <input type="url" class="form-control" id="link" name="link" placeholder="http://example.com">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Announcement</button>
+                        </form>
+                    </div>
+                <!-- /.card -->
+</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

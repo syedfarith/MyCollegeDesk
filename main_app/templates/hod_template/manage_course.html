@@ -1,0 +1,100 @@
+{% extends 'main_app/base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock page_title %}
+
+{% block content %}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">{{page_title}}</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="container mt-4">
+                            <div class="row">
+                                {% for course in courses %}
+                                <div class="col-md-4 mb-4">
+                                    <div class="course-card">
+                                        <div class="card-content">
+                                            <h3 class="course-title">{{ course.name }}</h3>
+                                            <div class="card-actions">
+                                                <a href="{% url 'edit_course' course.id %}" class="btn-action edit">Edit</a>
+                                                <a href="{% url 'delete_course' course.id %}" class="btn-action delete" onclick="return confirm('Are you sure you want to delete this course?')">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        
+<style>
+.container {
+    padding: 20px;
+}
+
+.course-card {
+    border-left: 5px solid #007bff; /* Accent border */
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 10px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.course-title {
+    margin-top: 0;
+    color: #333;
+}
+
+.card-actions {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.btn-action {
+    padding: 5px 15px;
+    margin-left: 10px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.edit {
+    background-color: #28a745; /* Green */
+}
+
+.delete {
+    background-color: #dc3545; /* Red */
+}
+
+.edit:hover {
+    background-color: #218838;
+}
+
+.delete:hover {
+    background-color: #c82333;
+}
+
+</style>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
